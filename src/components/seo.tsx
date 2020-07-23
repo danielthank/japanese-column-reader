@@ -34,6 +34,7 @@ const SEO: React.FC<Props> = ({ description, meta = [], title }) => {
       }
     `
   )
+  const fullTitle = `${site.siteMetadata.title} | ${title}`
   const metaDescription = description || site.siteMetadata.description
   return (
     <Helmet
@@ -49,7 +50,7 @@ const SEO: React.FC<Props> = ({ description, meta = [], title }) => {
         },
         {
           property: `og:title`,
-          content: title,
+          content: fullTitle,
         },
         {
           property: `og:description`,
@@ -69,7 +70,7 @@ const SEO: React.FC<Props> = ({ description, meta = [], title }) => {
         },
         {
           name: `twitter:title`,
-          content: `${site.siteMetadata.title} | ${title}`,
+          content: fullTitle,
         },
       ].concat(meta)}
     />
