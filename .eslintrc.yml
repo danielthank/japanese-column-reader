@@ -1,0 +1,24 @@
+env:
+  node: true
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: module
+extends:
+- eslint:recommended
+- plugin:react/recommended
+- plugin:prettier/recommended
+- prettier/react
+rules:
+  react/prop-types: 'off'
+overrides:
+- files:
+  - "*.ts"
+  - "*.tsx"
+  extends:
+  - plugin:@typescript-eslint/recommended
+  - prettier/@typescript-eslint
+- files:
+  - "*.d.ts"
+  rules:
+    prettier/prettier: off
+    "@typescript-eslint/no-explicit-any": off
