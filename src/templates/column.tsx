@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from "react"
 import { graphql } from "gatsby"
 import { useSwipeable } from "react-swipeable"
-import "typeface-noto-serif-jp"
 
 import { ColumnQuery } from "../../types/graphql-types"
 import style from "./column.module.css"
