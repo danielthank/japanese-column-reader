@@ -2,19 +2,18 @@ import React, { useState, Fragment } from "react"
 import { graphql } from "gatsby"
 import { useSwipeable } from "react-swipeable"
 
-import { ColumnQuery } from "../../types/graphql-types"
+import { ColumnQuery, SitePageContext } from "../../types/graphql-types"
 import style from "./column.module.css"
-import SEO from "../components/seo"
+import SEO from "../components/SEO"
+import Date from "./Date"
 
 interface Props {
   data: ColumnQuery
-  pageContext: {
-    date: string
-  }
+  pageContext: SitePageContext
 }
 
 const Column: React.FC<Props> = ({ data, pageContext }) => {
-  const { date } = pageContext
+  const { date, oldestDate, newestDate } = pageContext
   const columnLength = data.allColumn.edges.length
   const [columnId, setColumnId] = useState(0)
 
@@ -38,7 +37,12 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
           <div className={style.middle}>
             {`${column.source} ${column.editorial}`}
           </div>
-          <div className={style.right}>{dateFormat}</div>
+          <Date
+            className={style.right}
+            date={date}
+            oldestDate={oldestDate}
+            newestDate={newestDate}
+          />
         </header>
         <div className={style.article} {...swipeableHandler}>
           <div className={style.text}>

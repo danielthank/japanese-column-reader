@@ -1541,10 +1541,14 @@ export type SitePageConnectionGroupArgs = {
 
 export type SitePageContext = {
   date?: Maybe<Scalars['Date']>;
+  newestDate?: Maybe<Scalars['Date']>;
+  oldestDate?: Maybe<Scalars['Date']>;
 };
 
 export type SitePageContextFilterInput = {
   date?: Maybe<DateQueryOperatorInput>;
+  newestDate?: Maybe<DateQueryOperatorInput>;
+  oldestDate?: Maybe<DateQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -1647,6 +1651,8 @@ export type SitePageFieldsEnum =
   | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
   | 'context___date'
+  | 'context___newestDate'
+  | 'context___oldestDate'
   | 'pluginCreator___id'
   | 'pluginCreator___parent___id'
   | 'pluginCreator___parent___parent___id'

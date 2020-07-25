@@ -1,0 +1,102 @@
+.svg {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.datePicker {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.datePicker button {
+  margin: 0;
+  outline: 0;
+  border: 0;
+  border-radius: 4px;
+  color: grey;
+  background-color: transparent;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.datePicker button.selected {
+  color: white;
+  background-color: tomato;
+}
+
+.year {
+  display: flex;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.year::-webkit-scrollbar {
+  display: none
+}
+
+.year button {
+  margin: auto;
+  padding: 24px 24px;
+  font-size: 24px;
+}
+
+.month {
+  margin-top: -2px;
+  display: flex;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.month::-webkit-scrollbar {
+  display: none
+}
+
+.month button {
+  margin: auto;
+  padding: 12px 12px;
+  font-size: 14px;
+}
+
+.day {
+  margin: -2px;
+  display: flex;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.day::-webkit-scrollbar {
+  display: none
+}
+
+.day button {
+  margin: auto;
+  padding: 6px 8px;
+  font-size: 14px;
+}
+
+.day .dayInWeek {
+  font-size: 10px;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  color: white;
+  background-color: tomato;
+  border: 0;
+  border-radius: 0 0 4px 4px;
+  outline: 0;
+  font-size: 16px;
+}
+
+.submit:disabled {
+  background-color: grey;
+}
