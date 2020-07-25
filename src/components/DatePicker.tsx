@@ -6,7 +6,7 @@ import Dialog from "../components/Dialog"
 import style from "./DatePicker.module.css"
 
 interface Props {
-  selectedDate: string
+  initDate: string
   open: boolean
   onClose: (date: string) => void
   oldestDate: string
@@ -16,22 +16,27 @@ interface Props {
 const japaneseDayInWeek = "日月火水木金土".split("")
 
 const DatePicker: React.FC<Props> = props => {
-  const { open, onClose, selectedDate, oldestDate, newestDate } = props
+  const { open, onClose, initDate, oldestDate, newestDate } = props
 
-  const [selectedYear, setSelectedYear] = useState(selectedDate.substr(0, 4))
+  const [selectedYear, setSelectedYear] = useState(initDate.substr(0, 4))
   const [yearPostion, setYearPosition] = useState<Array<number | undefined>>([])
-  const [selectedMonth, setSelectedMonth] = useState(selectedDate.substr(4, 2))
+  const [selectedMonth, setSelectedMonth] = useState(initDate.substr(4, 2))
   const [monthPosition, setMonthPosition] = useState<Array<number | undefined>>(
     []
   )
-  const [selectedDay, setSelectedDay] = useState(selectedDate.substr(6, 2))
+  const [selectedDay, setSelectedDay] = useState(initDate.substr(6, 2))
   const [dayPosition, setDayPosition] = useState<Array<number | undefined>>([])
-  const [valid, setValid] = useState(false)
 
   const yearDivRef = useRef<HTMLDivElement>(null)
   const selectedYearRef = useRef<HTMLButtonElement>(null)
   const selectedMonthRef = useRef<HTMLButtonElement>(null)
   const selectedDayRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    selectedYearRef.current?.scrollIntoView({ inline: "start" })
+    selectedMonthRef.current?.scrollIntoView({ inline: "start" })
+    selectedDayRef.current?.scrollIntoView({ inline: "start" })
+  }, [])
 
   const yearOptions = ["2019", "2020"]
   const monthOptions = Array.from({ length: 12 }, (v, k) => k + 1).map(month =>
@@ -56,17 +61,14 @@ const DatePicker: React.FC<Props> = props => {
   }))
 
   const handleClose = () => {
-    onClose(selectedDate)
+    onClose(initDate)
   }
 
-  useEffect(() => {
-    const formatDate = `${selectedYear}${selectedMonth}${selectedDay}`
-    setValid(formatDate >= oldestDate && formatDate <= newestDate)
-  }, [selectedYear, selectedMonth, selectedDay, oldestDate, newestDate])
+  const formatDate = `${selectedYear}${selectedMonth}${selectedDay}`
+  const isValid = formatDate >= oldestDate && formatDate <= newestDate
 
   const handleDateSubmit = useCallback(() => {
-    const formatDate = `${selectedYear}${selectedMonth}${selectedDay}`
-    if (valid) onClose(formatDate)
+    if (isValid) onClose(formatDate)
   }, [selectedYear, selectedMonth, selectedDay])
 
   const getMinMax = () => {
@@ -75,7 +77,7 @@ const DatePicker: React.FC<Props> = props => {
       min: rect?.x as number,
       max: (rect?.x === undefined
         ? undefined
-        : rect?.x + rect?.width ?? 0) as number,
+        : rect?.x + (rect?.width ?? 0) + 2) as number,
     }
   }
 
@@ -189,9 +191,11 @@ const DatePicker: React.FC<Props> = props => {
       <button
         className={style.submit}
         onClick={handleDateSubmit}
-        disabled={!valid}
+        disabled={!isValid}
       >
-        <span>{valid ? "この日のコラムを読む" : "別の日を選んでください"}</span>
+        <span>
+          {isValid ? "この日のコラムを読む" : "別の日を選んでください"}
+        </span>
       </button>
     </Dialog>
   )

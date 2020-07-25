@@ -5,7 +5,7 @@ import { useSwipeable } from "react-swipeable"
 import { ColumnQuery, SitePageContext } from "../../types/graphql-types"
 import style from "./column.module.css"
 import SEO from "../components/SEO"
-import Date from "./Date"
+import Date from "../components/Date"
 
 interface Props {
   data: ColumnQuery

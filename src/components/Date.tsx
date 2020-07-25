@@ -12,26 +12,25 @@ interface Props {
 const Date: React.FC<Props> = props => {
   const { className, date, ...others } = props
   const [open, setOpen] = useState(false)
-  const [selectedDate, setSelectedDate] = useState(date)
 
   const handleClickOpen = () => {
     setOpen(true)
   }
 
   const handleClose = (dateToGo: string) => {
+    console.log(`dateToGo${dateToGo}`)
     navigate(`/column/${dateToGo}`)
     setOpen(false)
-    setSelectedDate(dateToGo)
   }
 
   const dateFormat = `${date.substr(4, 2)}/${date.substr(6, 2)}`
   return (
     <Fragment>
-      <div onClick={handleClickOpen} className={className}>
-        {dateFormat}
+      <div role="button" onClick={handleClickOpen} className={className}>
+        <span>{dateFormat}</span>
       </div>
       <DatePicker
-        selectedDate={selectedDate}
+        initDate={date}
         open={open}
         onClose={handleClose}
         {...others}
