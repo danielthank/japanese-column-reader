@@ -65,7 +65,6 @@ export const query = graphql`
           id
           source
           editorial
-          title
           text
         }
       }
