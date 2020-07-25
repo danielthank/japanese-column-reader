@@ -13,7 +13,7 @@ exports.createPages = async ({ actions: { createPage } }) => {
       const date = filename.match(/column_(\d*)\.json/)[1]
       createPage({
         path: `/column/${date}/`,
-        component: require.resolve("./src/templates/Column.tsx"),
+        component: require.resolve("./src/templates/column.tsx"),
         context: {
           date,
           newestDate,
@@ -23,7 +23,7 @@ exports.createPages = async ({ actions: { createPage } }) => {
     })
     createPage({
       path: `/`,
-      component: require.resolve("./src/templates/Column.tsx"),
+      component: require.resolve("./src/templates/column.tsx"),
       context: {
         date: newestDate,
         newestDate,
