@@ -41,7 +41,7 @@ const DatePicker: React.FC<Props> = props => {
     {
       length: new Date(
         Number(selectedYear),
-        Number(selectedMonth), // previous month
+        Number(selectedMonth), // next month
         0
       ).getDate(),
     },
@@ -49,7 +49,7 @@ const DatePicker: React.FC<Props> = props => {
   ).map(day => ({
     dayInWeek: new Date(
       Number(selectedYear),
-      Number(selectedMonth + 1), // this month
+      Number(selectedMonth) - 1, // this month
       day
     ).getDay(),
     day: day.toString().padStart(2, "0"),

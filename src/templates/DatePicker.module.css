@@ -26,6 +26,10 @@
   box-sizing: border-box;
 }
 
+.datePicker button::-moz-focus-inner {
+  border: 0;
+}
+
 .datePicker button.selected {
   color: white;
   background-color: tomato;
