@@ -17,7 +17,13 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
   const { date, oldestDate, newestDate } = pageContext
   const columnLength = data.allColumn.edges.length
 
-  const columnIdInHash = Number(document.location.hash.substr(1))
+  let columnIdInHash = 0
+  if (typeof window !== "undefined") {
+    const tmp = Number(document.location.hash.substr(1))
+    if (Number.isInteger(tmp)) {
+      columnIdInHash = tmp
+    }
+  }
   const [columnId, setColumnId] = useState(
     Number.isInteger(columnIdInHash) ? columnIdInHash : 0
   )
