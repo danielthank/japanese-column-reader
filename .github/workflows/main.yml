@@ -21,7 +21,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Crawl news data
       run: |
-        node crawl.js
+        node crawler/crawl.js
     - name: Add and commit
       uses: EndBug/add-and-commit@v4.2.1
       with:
