@@ -1,4 +1,5 @@
 const execSync = require("child_process").execSync
+const fs = require("fs")
 
 const formatDate = time => {
   let month = (time.getMonth() + 1).toString()
@@ -10,8 +11,15 @@ const formatDate = time => {
 }
 
 const today = formatDate(new Date())
+const filename = `../data/column_${today}.json`
 
-execSync(`scrapy crawl column -o ../data/column_${today}.json`, {
+try {
+  fs.unlinkSync(`${__dirname}/${filename}`)
+} catch (error) {
+  if (error.code !== "ENOENT") throw error
+}
+
+execSync(`scrapy crawl column -o ${filename}`, {
   encoding: "utf-8",
-  cwd: `${__dirname}/scrawler`,
+  cwd: __dirname,
 })

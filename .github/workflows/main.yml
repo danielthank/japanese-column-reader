@@ -1,18 +1,30 @@
-name: Download news data
+name: Crawl news data
 
 on:
   schedule:
-    - cron:  '0 10 * * *'
+    - cron:  0 10 * * *
   workflow_dispatch:
     
 jobs:
-  download-and-commit:
+  crawl-and-commit:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Download news data
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+        architecture: x64
+    - name: Install python dependencies
       run: |
-        node scrawl.js
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Crawl news data
+      run: |
+        node crawler/crawl.js
     - name: Add and commit
       uses: EndBug/add-and-commit@v4.2.1
-
+      with:
+        add: ./data
+        author_name: Yenru Chin
+        author_email: danielthank@gmail.com
