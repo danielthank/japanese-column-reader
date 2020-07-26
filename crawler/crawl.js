@@ -14,12 +14,12 @@ const today = formatDate(new Date())
 const filename = `../data/column_${today}.json`
 
 try {
-  fs.unlinkSync(filename)
+  fs.unlinkSync(`${__dirname}/${filename}`)
 } catch (error) {
   if (error.code !== "ENOENT") throw error
 }
 
 execSync(`scrapy crawl column -o ${filename}`, {
   encoding: "utf-8",
-  cwd: `${__dirname}/crawler`,
+  cwd: __dirname,
 })
