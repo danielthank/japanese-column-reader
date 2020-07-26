@@ -13,5 +13,5 @@ const today = formatDate(new Date())
 
 execSync(`scrapy crawl column -o ../data/column_${today}.json`, {
   encoding: "utf-8",
-  cwd: `${__dirname}/scrawler`,
+  cwd: `${__dirname}/crawler`,
 })
