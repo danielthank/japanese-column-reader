@@ -1,2 +1,2 @@
 scrapy
-newspaper
+newspaper3k
