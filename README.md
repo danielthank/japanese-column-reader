@@ -24,7 +24,7 @@
 
 * Parse news content by library [newspaper](https://github.com/codelucas/newspaper)
 
-* Generate SSR rendering static site based on the news content by [Gatsby](https://github.com/gatsbyjs/gatsby)
+* Generate server side rendering static site based on the news content using [Gatsby](https://github.com/gatsbyjs/gatsby)
 
 ## News source
 
