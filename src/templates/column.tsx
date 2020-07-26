@@ -1,6 +1,7 @@
-import React, { useState, Fragment } from "react"
+import React, { useState, Fragment, useEffect } from "react"
 import { graphql } from "gatsby"
 import { useSwipeable } from "react-swipeable"
+import { navigate } from "@reach/router"
 
 import { ColumnQuery, SitePageContext } from "../../types/graphql-types"
 import style from "./column.module.css"
@@ -15,14 +16,26 @@ interface Props {
 const Column: React.FC<Props> = ({ data, pageContext }) => {
   const { date, oldestDate, newestDate } = pageContext
   const columnLength = data.allColumn.edges.length
-  const [columnId, setColumnId] = useState(0)
+
+  const columnIdInHash = Number(document.location.hash.substr(1))
+  const [columnId, setColumnId] = useState(
+    Number.isInteger(columnIdInHash) ? columnIdInHash : 0
+  )
+
+  useEffect(() => {
+    console.log(columnIdInHash)
+  }, [])
 
   const swipeableHandler = useSwipeable({
-    onSwipedLeft: () => {
-      setColumnId((columnId + 1) % columnLength)
-    },
     onSwipedRight: () => {
-      setColumnId((columnId + columnLength - 1) % columnLength)
+      const nextColumnId = (columnId + 1) % columnLength
+      navigate(`#${nextColumnId}`)
+      setColumnId(nextColumnId)
+    },
+    onSwipedLeft: () => {
+      const nextColumnId = (columnId + columnLength - 1) % columnLength
+      navigate(`#${nextColumnId}`)
+      setColumnId(nextColumnId)
     },
   })
 
@@ -34,9 +47,7 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
       <div className={style.container}>
         <header className={style.title}>
           <div className={style.left} />
-          <div className={style.middle}>
-            {`${column.source} ${column.editorial}`}
-          </div>
+          <div className={style.middle}>{column.source}</div>
           <Date
             className={style.right}
             date={date}
@@ -46,6 +57,7 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
         </header>
         <div className={style.article} {...swipeableHandler}>
           <div className={style.text}>
+            <p className={style.editorial}>{column.editorial}</p>
             {column.text?.split(/[▼▲◆▽]/).map((par, i) => {
               if (!par.length) return null
               return <p key={i}>{par}</p>

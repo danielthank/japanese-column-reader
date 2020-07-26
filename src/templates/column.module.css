@@ -42,14 +42,21 @@ header .right {
 .text {
   display: inline-block;
   width: 100%;
+  max-width: 500px;
   writing-mode: vertical-rl;
   line-height: 2.24;
   columns: 16em auto;
-  column-fill: balance;
+  column-fill: auto;
   column-gap: 20px;
   text-align: left;
 }
 
 .text p {
-  margin: 0 0 28px 28px;
+  margin: 0 0 28px 20px;
+}
+
+.text p.editorial {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 14px;
 }
