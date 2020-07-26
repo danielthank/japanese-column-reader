@@ -2,17 +2,25 @@ name: Download news data
 
 on:
   schedule:
-    - cron:  '0 10 * * *'
+    - cron:  "0 10 * * *"
   workflow_dispatch:
     
 jobs:
-  download-and-commit:
+  "Download and commit":
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.x"
+        architecture: "x64"
+    - name: Install python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Download news data
       run: |
         node scrawl.js
     - name: Add and commit
       uses: EndBug/add-and-commit@v4.2.1
-
