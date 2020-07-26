@@ -24,13 +24,12 @@
 
 * Parse news content by library [newspaper](https://github.com/codelucas/newspaper)
 
-* Generate a static site based on the news content by [Gatsby](https://github.com/gatsbyjs/gatsby)
+* Generate SSR rendering static site based on the news content by [Gatsby](https://github.com/gatsbyjs/gatsby)
 
 ## News source
 
 The news content is from [The 47 Column](https://www.47news.jp/news/column/47column)
 
 Everyday at 21:00 JST, a cron job on Github Action is triggered to crawl the content of columns from the above website.
-
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3403f1b5-ae38-4c81-a3b5-d9fb0d174e31/deploy-status)](https://app.netlify.com/sites/keen-brahmagupta-8849fd/deploys)
