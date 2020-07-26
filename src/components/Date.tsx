@@ -18,7 +18,6 @@ const Date: React.FC<Props> = props => {
   }
 
   const handleClose = (dateToGo: string) => {
-    console.log(`dateToGo${dateToGo}`)
     navigate(`/column/${dateToGo}`)
     setOpen(false)
   }
