@@ -1,16 +1,17 @@
 import React, { useState, Fragment } from "react"
 import DatePicker from "./DatePicker"
-import { navigate } from "gatsby"
+import { navigate } from "@reach/router"
 
 interface Props {
   className: string
   date: string
+  columnId: number
   oldestDate: string
   newestDate: string
 }
 
 const Date: React.FC<Props> = props => {
-  const { className, date, ...others } = props
+  const { className, date, columnId, ...others } = props
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
@@ -18,7 +19,7 @@ const Date: React.FC<Props> = props => {
   }
 
   const handleClose = (dateToGo: string) => {
-    navigate(`/column/${dateToGo}`)
+    navigate(`/column/${dateToGo}#${columnId}`)
     setOpen(false)
   }
 

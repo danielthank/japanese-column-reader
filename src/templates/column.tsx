@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react"
+import React, { useState, Fragment } from "react"
 import { graphql } from "gatsby"
 import { useSwipeable } from "react-swipeable"
 import { navigate } from "@reach/router"
@@ -20,17 +20,11 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
   let columnIdInHash = 0
   if (typeof window !== "undefined") {
     const tmp = Number(document.location.hash.substr(1))
-    if (Number.isInteger(tmp)) {
+    if (Number.isInteger(tmp) && data.allColumn.edges[tmp]) {
       columnIdInHash = tmp
     }
   }
-  const [columnId, setColumnId] = useState(
-    Number.isInteger(columnIdInHash) ? columnIdInHash : 0
-  )
-
-  useEffect(() => {
-    console.log(columnIdInHash)
-  }, [])
+  const [columnId, setColumnId] = useState(columnIdInHash)
 
   const swipeableHandler = useSwipeable({
     onSwipedRight: () => {
@@ -57,6 +51,7 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
           <Date
             className={style.right}
             date={date}
+            columnId={columnId}
             oldestDate={oldestDate}
             newestDate={newestDate}
           />
