@@ -15,18 +15,21 @@ class ColumnSpider(scrapy.Spider):
 
   def parse(self, response):
     for item in response.css(".main-list a"):
-      url = item.css("::attr(href)").get()
-      source = item.css(".article_source_info span::text").get()
-      editorial = item.css(".editorial_name::text").get()
-      article = Article(url, language="ja")
-      article.download()
-      article.parse()
-      if len(article.text) < 100: continue
-      yield {
-        "source": source,
-        "editorial": editorial,
-        "url": article.url,
-        "title": article.title,
-        "text": article.text,
-        "publish_date": self.today,
-      }
+      try:
+        url = item.css("::attr(href)").get()
+        source = item.css(".article_source_info span::text").get()
+        editorial = item.css(".editorial_name::text").get()
+        article = Article(url, language="ja")
+        article.download()
+        article.parse()
+        if len(article.text) < 100: continue
+        yield {
+          "source": source,
+          "editorial": editorial,
+          "url": article.url,
+          "title": article.title,
+          "text": article.text,
+          "publish_date": self.today,
+        }
+      except:
+        pass
