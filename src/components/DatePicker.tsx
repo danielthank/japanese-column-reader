@@ -3,7 +3,7 @@ import clsx from "clsx"
 import { throttle } from "lodash"
 
 import Dialog from "../components/Dialog"
-import style from "./DatePicker.module.css"
+import * as style from "./DatePicker.module.css"
 
 interface Props {
   initDate: string
@@ -38,7 +38,7 @@ const DatePicker: React.FC<Props> = props => {
     selectedDayRef.current?.scrollIntoView({ inline: "start" })
   }, [])
 
-  const yearOptions = ["2019", "2020"]
+  const yearOptions = ["2019", "2020", "2021"]
   const monthOptions = Array.from({ length: 12 }, (v, k) => k + 1).map(month =>
     month.toString().padStart(2, "0")
   )

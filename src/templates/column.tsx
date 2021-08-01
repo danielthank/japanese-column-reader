@@ -1,10 +1,9 @@
 import React, { useState, Fragment } from "react"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import { useSwipeable } from "react-swipeable"
-import { navigate } from "@reach/router"
 
 import { ColumnQuery, SitePageContext } from "../../types/graphql-types"
-import style from "./column.module.css"
+import * as style from "./column.module.css"
 import SEO from "../components/SEO"
 import Date from "../components/Date"
 
@@ -45,7 +44,7 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
     <Fragment>
       <SEO title={dateFormat} />
       <div className={style.container}>
-        <header className={style.title}>
+        <header>
           <div className={style.left} />
           <div className={style.middle}>{column.source}</div>
           <Date

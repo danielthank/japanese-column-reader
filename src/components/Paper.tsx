@@ -1,6 +1,6 @@
 import React from "react"
 
-import style from "./Paper.module.css"
+import * as style from "./Paper.module.css"
 
 interface Props {
   role?: string

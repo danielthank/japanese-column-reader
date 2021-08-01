@@ -9,7 +9,7 @@ module.exports = {
   siteMetadata: {
     title: "新聞コラム",
     description: "日本各地の連載コラム",
-    author: "Yen-Ru Chin",
+    author: "Daniel Chin",
     lang: "ja",
   },
   plugins: [

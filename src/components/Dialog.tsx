@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 
 import Modal from "./Modal"
-import style from "./Dialog.module.css"
+import * as style from "./Dialog.module.css"
 import Paper from "./Paper"
 
 interface Props {
