@@ -15,6 +15,10 @@ interface Props {
 
 const japaneseDayInWeek = "日月火水木金土".split("")
 
+const range = (start: number, end: number) => {
+  return Array.from({ length: end - start }, (_v, k) => k + start)
+}
+
 const DatePicker: React.FC<Props> = props => {
   const { open, onClose, initDate, oldestDate, newestDate } = props
 
@@ -38,7 +42,8 @@ const DatePicker: React.FC<Props> = props => {
     selectedDayRef.current?.scrollIntoView({ inline: "start" })
   }, [])
 
-  const yearOptions = ["2019", "2020", "2021"]
+  const yearOptions = range(Number(oldestDate.substr(0, 4)), Number(newestDate.substr(0, 4)) + 1)
+    .map((v) => v.toString())
   const monthOptions = Array.from({ length: 12 }, (v, k) => k + 1).map(month =>
     month.toString().padStart(2, "0")
   )
@@ -50,7 +55,7 @@ const DatePicker: React.FC<Props> = props => {
         0
       ).getDate(),
     },
-    (v, k) => k + 1
+    (_v, k) => k + 1
   ).map(day => ({
     dayInWeek: new Date(
       Number(selectedYear),
