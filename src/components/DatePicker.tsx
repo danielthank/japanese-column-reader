@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react"
 import clsx from "clsx"
-import { throttle } from "lodash"
 
 import Dialog from "../components/Dialog"
 import * as style from "./DatePicker.module.css"
@@ -14,6 +13,17 @@ interface Props {
 }
 
 const japaneseDayInWeek = "日月火水木金土".split("")
+
+const throttle = (fn: () => void, ms: number) => {
+  let timeout: ReturnType<typeof setTimeout> | null = null
+  return () => {
+    if (timeout) return
+    timeout = setTimeout(() => {
+      timeout = null
+    }, ms)
+    fn()
+  }
+}
 
 const range = (start: number, end: number) => {
   return Array.from({ length: end - start }, (_v, k) => k + start)

@@ -24,14 +24,12 @@
     "gatsby-plugin-react-helmet": "^6.16.0",
     "gatsby-source-filesystem": "^5.16.0",
     "gatsby-transformer-json": "^5.16.0",
-    "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
     "react-swipeable": "^7.0.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.24",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "@types/react-helmet": "^6.1.11",
