@@ -26,13 +26,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-emotion",
-    "gatsby-plugin-typescript",
-    {
-      resolve: "gatsby-plugin-graphql-codegen",
-      options: {
-        fileName: "types/graphql-types.d.ts",
-      },
-    },
     "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-plugin-manifest`,

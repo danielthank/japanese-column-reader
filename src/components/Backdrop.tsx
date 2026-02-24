@@ -1,11 +1,11 @@
-import React from "react"
-import * as  style from "./Backdrop.module.css"
+import React, { PropsWithChildren } from "react"
+import * as style from "./Backdrop.module.css"
 
 interface Props {
   open: boolean
 }
 
-const Backdrop: React.FC<Props> = props => {
+const Backdrop: React.FC<PropsWithChildren<Props>> = props => {
   const { open, children, ...others } = props
   return open ? (
     <div className={style.backdrop} {...others}>

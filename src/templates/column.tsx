@@ -18,7 +18,7 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
 
   let columnIdInHash = 0
   if (typeof window !== "undefined") {
-    const tmp = Number(document.location.hash.substr(1))
+    const tmp = Number(document.location.hash.substring(1))
     if (Number.isInteger(tmp) && data.allColumn.edges[tmp]) {
       columnIdInHash = tmp
     }
@@ -38,8 +38,33 @@ const Column: React.FC<Props> = ({ data, pageContext }) => {
     },
   })
 
-  const dateFormat = `${date.substr(4, 2)}/${date.substr(6, 2)}`
-  const column = data.allColumn.edges[columnId].node
+  const dateFormat = `${date.substring(4, 6)}/${date.substring(6, 8)}`
+  const column = data.allColumn.edges[columnId]?.node
+  if (!column) {
+    return (
+      <Fragment>
+        <SEO title={dateFormat} />
+        <div className={style.container}>
+          <header>
+            <div className={style.left} />
+            <div className={style.middle}>{dateFormat}</div>
+            <Date
+              className={style.right}
+              date={date}
+              columnId={0}
+              oldestDate={oldestDate}
+              newestDate={newestDate}
+            />
+          </header>
+          <div className={style.article}>
+            <div className={style.text}>
+              <p>この日のコラムはありません</p>
+            </div>
+          </div>
+        </div>
+      </Fragment>
+    )
+  }
   return (
     <Fragment>
       <SEO title={dateFormat} />

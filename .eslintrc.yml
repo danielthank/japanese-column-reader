@@ -7,7 +7,6 @@ extends:
 - eslint:recommended
 - plugin:react/recommended
 - plugin:prettier/recommended
-- prettier/react
 rules:
   react/prop-types: 'off'
 overrides:
@@ -16,7 +15,7 @@ overrides:
   - "*.tsx"
   extends:
   - plugin:@typescript-eslint/recommended
-  - prettier/@typescript-eslint
+  - prettier
 - files:
   - "*.d.ts"
   rules:

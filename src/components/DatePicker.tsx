@@ -22,13 +22,17 @@ const range = (start: number, end: number) => {
 const DatePicker: React.FC<Props> = props => {
   const { open, onClose, initDate, oldestDate, newestDate } = props
 
-  const [selectedYear, setSelectedYear] = useState(initDate.substr(0, 4))
-  const [yearPostion, setYearPosition] = useState<Array<number | undefined>>([])
-  const [selectedMonth, setSelectedMonth] = useState(initDate.substr(4, 2))
-  const [monthPosition, setMonthPosition] = useState<Array<number | undefined>>(
-    []
+  const [selectedYear, setSelectedYear] = useState(
+    initDate.substring(0, 4),
   )
-  const [selectedDay, setSelectedDay] = useState(initDate.substr(6, 2))
+  const [yearPostion, setYearPosition] = useState<Array<number | undefined>>([])
+  const [selectedMonth, setSelectedMonth] = useState(
+    initDate.substring(4, 6),
+  )
+  const [monthPosition, setMonthPosition] = useState<Array<number | undefined>>(
+    [],
+  )
+  const [selectedDay, setSelectedDay] = useState(initDate.substring(6, 8))
   const [dayPosition, setDayPosition] = useState<Array<number | undefined>>([])
 
   const yearDivRef = useRef<HTMLDivElement>(null)
@@ -42,25 +46,27 @@ const DatePicker: React.FC<Props> = props => {
     selectedDayRef.current?.scrollIntoView({ inline: "start" })
   }, [])
 
-  const yearOptions = range(Number(oldestDate.substr(0, 4)), Number(newestDate.substr(0, 4)) + 1)
-    .map((v) => v.toString())
-  const monthOptions = Array.from({ length: 12 }, (v, k) => k + 1).map(month =>
-    month.toString().padStart(2, "0")
+  const yearOptions = range(
+    Number(oldestDate.substring(0, 4)),
+    Number(newestDate.substring(0, 4)) + 1,
+  ).map(v => v.toString())
+  const monthOptions = Array.from({ length: 12 }, (v, k) => k + 1).map(
+    month => month.toString().padStart(2, "0"),
   )
   const dayOptions = Array.from(
     {
       length: new Date(
         Number(selectedYear),
         Number(selectedMonth), // next month
-        0
+        0,
       ).getDate(),
     },
-    (_v, k) => k + 1
+    (_v, k) => k + 1,
   ).map(day => ({
     dayInWeek: new Date(
       Number(selectedYear),
       Number(selectedMonth) - 1, // this month
-      day
+      day,
     ).getDay(),
     day: day.toString().padStart(2, "0"),
   }))
@@ -74,7 +80,7 @@ const DatePicker: React.FC<Props> = props => {
 
   const handleDateSubmit = useCallback(() => {
     if (isValid) onClose(formatDate)
-  }, [selectedYear, selectedMonth, selectedDay])
+  }, [isValid, formatDate, onClose])
 
   const getMinMax = () => {
     const rect = yearDivRef.current?.getBoundingClientRect()

@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, PropsWithChildren } from "react"
 
 import Modal from "./Modal"
 import * as style from "./Dialog.module.css"
@@ -9,7 +9,7 @@ interface Props {
   onClose: () => void
 }
 
-const Dialog: React.FC<Props> = props => {
+const Dialog: React.FC<PropsWithChildren<Props>> = props => {
   const { open, onClose, children, ...others } = props
 
   const mouseDownTarget = useRef<EventTarget>()

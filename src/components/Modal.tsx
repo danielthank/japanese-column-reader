@@ -1,4 +1,4 @@
-import React from "react"
+import React, { PropsWithChildren } from "react"
 import Portal from "./Portal"
 import Backdrop from "./Backdrop"
 
@@ -7,7 +7,7 @@ interface Props {
   open: boolean
 }
 
-const Modal: React.FC<Props> = props => {
+const Modal: React.FC<PropsWithChildren<Props>> = props => {
   const { container, children, open } = props
 
   return (

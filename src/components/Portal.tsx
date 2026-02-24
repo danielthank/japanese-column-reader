@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, PropsWithChildren } from "react"
 import { createPortal } from "react-dom"
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   onRendered?: () => void
 }
 
-const Portal: React.FC<Props> = props => {
+const Portal: React.FC<PropsWithChildren<Props>> = props => {
   const { children, container, onRendered } = props
 
   useEffect(() => {

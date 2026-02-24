@@ -4,14 +4,14 @@ on:
   schedule:
     - cron:  0 10 * * *
   workflow_dispatch:
-    
+
 jobs:
   crawl-and-commit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Python 3.x
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: 3.x
         architecture: x64
@@ -23,7 +23,7 @@ jobs:
       run: |
         node crawler/crawl.js
     - name: Add and commit
-      uses: EndBug/add-and-commit@v4.2.1
+      uses: EndBug/add-and-commit@v9
       with:
         add: ./data
-        default_author: github_actor
+        default_author: github_actions

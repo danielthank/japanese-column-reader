@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react"
 import DatePicker from "./DatePicker"
-import { navigate } from "@reach/router"
+import { navigate } from "gatsby"
 
 interface Props {
   className: string
@@ -23,7 +23,7 @@ const Date: React.FC<Props> = props => {
     setOpen(false)
   }
 
-  const dateFormat = `${date.substr(4, 2)}/${date.substr(6, 2)}`
+  const dateFormat = `${date.substring(4, 6)}/${date.substring(6, 8)}`
   return (
     <Fragment>
       <div role="button" onClick={handleClickOpen} className={className}>
